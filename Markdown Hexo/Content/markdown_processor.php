@@ -59,7 +59,7 @@ EOT;
             $imageHeight = $step->media->thumbnail->height;
             $imageLink = $step->media->fullsize->relative_filename;
           } else {
-            $imageURL = $step->media->fullsize->relative_filename;
+            $imageURL = basename($step->media->fullsize->relative_filename);
             $imageWidth = $step->media->fullsize->width;
             $imageHeight = $step->media->fullsize->height;
             $imageLink = '';
@@ -73,10 +73,9 @@ EOT;
         
           // Get HTML for step image
           ob_start();
+          //![$mediaAlt]({$imageURL})
           echo <<<EOT
-![{$mediaAlt}][{$imgIndex}]
-
-[{$imgIndex}]: {$imageURL} width={$imageWidth}px height={$imageHeight}px
+{% asset_img {$imageURL} %}
 EOT;
           $imageMarkup = ob_get_clean();
         }
