@@ -1,5 +1,24 @@
 <?php
 
+/**
+* Prints out contents of an array for Hexo Front-Matter
+* $attributes: Array of attributes
+* $attribute_name: Name of Front-Matter list
+*/
+function printHexoAttributesForArticle($attributes, $attribute_name)
+{
+  $output = '';
+  
+  if (!is_array($attributes)) return '';
+    $output .= $attribute_name . ': ' . PHP_EOL;
+	foreach($attributes as $attribute)
+	{
+		$output .= '- ' . $attribute . PHP_EOL;
+	}
+  
+  return $output;
+}
+
 /** 
  * \brief Prints an article as Markdown.
  *
