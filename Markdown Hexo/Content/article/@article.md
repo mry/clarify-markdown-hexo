@@ -6,7 +6,13 @@
 
 require('markdown_processor.php');
 
-if (!empty($article->title)) print ('#' . myPrintTextRunAsMarkdown($article->title, 'title') . "\n\n");
+// front-matter
+print ('---' . PHP_EOL);
+
+if (!empty($article->title)) print ('title: ' . myPrintTextRunAsMarkdown($article->title, 'title') . PHP_EOL);
+
+print ('---' . PHP_EOL);
+
 myPrintArticleMarkdown($article);
 
 ?>
