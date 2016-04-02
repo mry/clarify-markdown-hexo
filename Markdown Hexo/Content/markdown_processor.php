@@ -173,10 +173,13 @@ function myPrintTextRunAsMarkdown($textrun, $type='instructions') {
     */
     if ($para->metadata->style == 'code')
     {
+    	$output .= '{% codeblock %}' . PHP_EOL;
     	$output .= '     ';
     	//$closingPara = PHP_EOL;
       //$output .= PHP_EOL . '```' . PHP_EOL;
       //$closingPara = PHP_EOL . '```' . PHP_EOL;
+      $closingPara = PHP_EOL . ' {% endcodeblock %}' . PHP_EOL;
+      
     }
     else if (!empty($para->style->list_style))
     {      	
