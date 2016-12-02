@@ -5,18 +5,46 @@
 * $attributes: Array of attributes
 * $attribute_name: Name of Front-Matter list
 */
-function printHexoAttributesForArticle($attributes, $attribute_name)
+function printHexoAttributesForArticle($attributes, $attribute_name, $prefix_show = '', $prefix_hide = '')
 {
   $output = '';
   
   if (!is_array($attributes)) return '';
     $output .= $attribute_name . ': ' . PHP_EOL;
-	foreach($attributes as $attribute)
-	{
-		$output .= '- ' . $attribute . PHP_EOL;
-	}
-  
+        foreach($attributes as $attribute)
+        {
+          //if attribute has a prefix we want to hide, then skip it
+          if($prefix_hide != '' && hasPrefix($attribute,$prefix_hide)) continue;
+
+          //if attribute does not have the prefix we want to show, then skip it
+          if($prefix_show != '' && !hasPrefix($attribute,$prefix_show)) continue;
+          
+          //if attribute has prefix we want to show, include it
+          if($prefix_show != '' && hasPrefix($attribute,$prefix_show)){
+              $output .= '- ' . stripPrefix($attribute,$prefix_show) . PHP_EOL;
+              continue;
+          }
+        
+        //normal behavior when prefixes not provided
+        $output .= '- ' . $attribute . PHP_EOL;
+        }
   return $output;
+}
+
+//checks if the string begins with specified prefix
+function hasPrefix($text,$prefix)
+{
+  if($prefix == '') return false;
+  $prefixLength = strlen($prefix);
+  if(strlen($text) > $prefixLength && substr($text,0,$prefixLength) == $prefix) return true;
+  return false;
+}
+
+//returns the attribute with prefix stripped off
+function stripPrefix($text,$prefix)
+{
+  $prefixLength = strlen($prefix);
+  return substr($text,$prefixLength);
 }
 
 /** 
