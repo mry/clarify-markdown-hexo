@@ -197,7 +197,7 @@ function myPrintTextRunAsMarkdown($textrun, $type='instructions') {
     	//$closingPara = PHP_EOL;
       //$output .= PHP_EOL . '```' . PHP_EOL;
       //$closingPara = PHP_EOL . '```' . PHP_EOL;
-      $closingPara = PHP_EOL . ' {% endcodeblock %}' . PHP_EOL;
+      $closingPara = PHP_EOL . '{% endcodeblock %}' . PHP_EOL;
       
     }
     else if (!empty($para->style->list_style))
